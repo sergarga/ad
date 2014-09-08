@@ -1,0 +1,9 @@
+git status <-- ver estado
+git add . (para todo) || directorio <-- preparar archivo para ser subido
+git commit -m "_______" <-- confirmar y subir localmente con mensaje
+git push <-- subir a github.com remoto
+
+git pull <-- actualizar carpeta / descargar
+git clone ... <-- Crear carpeta nueva con todo
+
+
