@@ -1,25 +1,20 @@
 using System;
 using Gtk;
-using MySql.Data.MySqlClient;
+using System.Data;
+using PCategoria;
 
 public partial class MainWindow: Gtk.Window
 {
-	private MySqlConnection mySqlConnection;
+	private IDbConnection dbConnection;
 	private ListStore listStore;
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 
 		deleteAction.Sensitive = false;
+		editAction.Sensitive = false;
 
-		mySqlConnection = new MySqlConnection (
-			"DataSource=localhost;" +
-			"Database=dbprueba;" +
-			"User ID=root;" +
-			"Password=sistemas"
-		);
-
-		mySqlConnection.Open ();
+		dbConnection = App.Instance.DbConnection;
 
 		treeView.AppendColumn ("id", new CellRendererText (), "text", 0);
 		treeView.AppendColumn ("nombre", new CellRendererText (), "text", 1);
@@ -29,48 +24,49 @@ public partial class MainWindow: Gtk.Window
 		fillListStore ();
 
 
-
 		//treeView.Selection.Changed += selectionChanged;
 		treeView.Selection.Changed += delegate {
-			deleteAction.Sensitive = treeView.Selection.CountSelectedRows() > 0;
+			bool hasSelected = treeView.Selection.CountSelectedRows() > 0;
+			deleteAction.Sensitive = hasSelected;
+			editAction.Sensitive = hasSelected;
 		};
 
 	}
 
 
-	private void fillListStore(){
-		MySqlCommand mySqlCommand = mySqlConnection.CreateCommand ();
-		mySqlCommand.CommandText = "select * from categoria";
 
-		MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader ();
-		while (mySqlDataReader.Read()) {
-			object id = mySqlDataReader ["id"].ToString();
-			object nombre = mySqlDataReader ["nombre"];
+
+	private void fillListStore(){
+		IDbCommand dbCommand = dbConnection.CreateCommand ();
+		dbCommand.CommandText = "select * from categoria";
+
+		IDataReader dataReader = dbCommand.ExecuteReader ();
+		while (dataReader.Read()) {
+			object id = dataReader ["id"].ToString();
+			object nombre = dataReader ["nombre"];
 			listStore.AppendValues (id, nombre);
 		}
-		mySqlDataReader.Close ();
+		dataReader.Close ();
 	}
 
 
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
-		mySqlConnection.Close ();
+		dbConnection.Close ();
 		Application.Quit ();
 		a.RetVal = true;
 	}
 
 	protected void OnAddActionActivated (object sender, EventArgs e)
 	{
-		MySqlCommand mySqlCommand = mySqlConnection.CreateCommand ();
+		IDbCommand dbCommand = dbConnection.CreateCommand ();
 		string insertSql = "insert into categoria (nombre) values ('{0}')";
 		insertSql= string.Format(insertSql, "Nuevo " + DateTime.Now);
 
-		mySqlCommand.CommandText = insertSql;
+		dbCommand.CommandText = insertSql;
 
-		mySqlCommand.ExecuteNonQuery ();
+		dbCommand.ExecuteNonQuery ();
 
-		listStore.Clear();
-		fillListStore ();
 	}
 
 	protected void OnRefreshActionActivated (object sender, EventArgs e)
@@ -91,14 +87,12 @@ public partial class MainWindow: Gtk.Window
 
 		if (Confirm(pregunta)) {
 
-			MySqlCommand mySqlCommand = mySqlConnection.CreateCommand ();
+			IDbCommand mySqlCommand = dbConnection.CreateCommand ();
 			string deleteSql = "delete from categoria where id = '{0}'";
 			deleteSql= string.Format(deleteSql, id);
 			mySqlCommand.CommandText = deleteSql;
 			mySqlCommand.ExecuteNonQuery ();
 
-			listStore.Clear();
-			fillListStore ();
 		} 
 
 	}
@@ -115,6 +109,15 @@ public partial class MainWindow: Gtk.Window
 		ResponseType result = (ResponseType)messageDialog.Run ();
 		messageDialog.Destroy ();
 		return result == ResponseType.Yes;
+	}
+
+	protected void OnEditActionActivated (object sender, EventArgs e)
+	{
+		TreeIter treeIter;
+		treeView.Selection.GetSelected (out treeIter);
+		object id=listStore.GetValue (treeIter, 0);
+		new CategoriaView (id);
+
 	}
 
 }
