@@ -1,6 +1,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using Gtk;
+using SerpisAd;
 
 namespace PCategoria
 {
