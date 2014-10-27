@@ -34,7 +34,9 @@ namespace PCategoria
 			dbCommand.CommandText = String.Format (
 				"update categoria set nombre=@nombre where id ={0}", id);
 
-			DbCommandExtensions.AddParameter(dbCommand, "nombre", entryNombre.Text);
+			//DbCommandExtensions.AddParameter(dbCommand, "nombre", entryNombre.Text);
+			dbCommand.AddParameter("nombre", entryNombre.Text);
+
 
 			dbCommand.ExecuteNonQuery ();
 

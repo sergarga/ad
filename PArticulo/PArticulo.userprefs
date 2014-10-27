@@ -1,10 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PCategoria/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/MainWindow.cs">
     <Files>
-      <File FileName="PCategoria/MainWindow.cs" Line="75" Column="3" />
-      <File FileName="PCategoria/CategoriaView.cs" Line="38" Column="55" />
-      <File FileName="PCategoria/Program.cs" Line="1" Column="1" />
+      <File FileName="PArticulo/Program.cs" Line="23" Column="23" />
+      <File FileName="PArticulo/MainWindow.cs" Line="83" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
