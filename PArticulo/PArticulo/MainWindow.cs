@@ -8,7 +8,8 @@ public partial class MainWindow: Gtk.Window
 {	
 
 	private IDbConnection dbConnection;
-	private ListStore listStore;
+	private ListStore listStoreA;
+	private ListStore listStoreC;
 
 
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
@@ -31,8 +32,8 @@ public partial class MainWindow: Gtk.Window
 		treeViewA.AppendColumn ("nombre", new CellRendererText (), "text", 1);
 		treeViewA.AppendColumn ("categoria", new CellRendererText (), "text", 2);
 		treeViewA.AppendColumn ("precio", new CellRendererText (), "text", 3);
-		listStore = new ListStore (typeof(string), typeof(string), typeof(string), typeof(string));
-		treeViewA.Model = listStore;
+		listStoreA = new ListStore (typeof(string), typeof(string), typeof(string), typeof(string));
+		treeViewA.Model = listStoreA;
 
 		fillListStoreA ();
 
@@ -50,8 +51,8 @@ public partial class MainWindow: Gtk.Window
 
 		treeViewC.AppendColumn ("id", new CellRendererText (), "text", 0);
 		treeViewC.AppendColumn ("nombre", new CellRendererText (), "text", 1);
-		listStore = new ListStore (typeof(string), typeof(string));
-		treeViewC.Model = listStore;
+		listStoreC = new ListStore (typeof(string), typeof(string));
+		treeViewC.Model = listStoreC;
 
 		fillListStoreC ();
 
@@ -76,7 +77,7 @@ public partial class MainWindow: Gtk.Window
 			object nombre = dataReader ["nombre"];
 			object categoria = dataReader ["categoria"].ToString();
 			object precio = dataReader ["precio"].ToString ();
-			listStore.AppendValues (id, nombre, categoria, precio);
+			listStoreA.AppendValues (id, nombre, categoria, precio);
 		}
 		dataReader.Close ();
 	}
@@ -89,7 +90,7 @@ public partial class MainWindow: Gtk.Window
 		while (dataReader.Read()) {
 			object id = dataReader ["id"].ToString();
 			object nombre = dataReader ["nombre"];
-			listStore.AppendValues (id, nombre);
+			listStoreC.AppendValues (id, nombre);
 		}
 		dataReader.Close ();
 	}
@@ -98,13 +99,13 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnRefreshActionAActivated (object sender, EventArgs e)
 	{
-		listStore.Clear();
+		listStoreA.Clear();
 		fillListStoreA ();
 	}
 
 	protected void OnRefreshActionCActivated (object sender, EventArgs e)
 	{
-		listStore.Clear();
+		listStoreC.Clear();
 		fillListStoreC ();
 	}
 
