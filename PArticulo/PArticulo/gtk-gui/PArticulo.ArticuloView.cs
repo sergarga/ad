@@ -16,7 +16,7 @@ namespace PArticulo
 		private global::Gtk.Entry entryP;
 		private global::Gtk.HBox hbox3;
 		private global::Gtk.Label label3;
-		private global::Gtk.Entry entryCat;
+		private global::Gtk.ComboBox comboboxC;
 
 		protected virtual void Build ()
 		{
@@ -33,7 +33,6 @@ namespace PArticulo
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Container child PArticulo.ArticuloView.Gtk.Container+ContainerChild
 			this.vbox1 = new global::Gtk.VBox ();
-			this.vbox1.Name = "vbox1";
 			this.vbox1.Spacing = 6;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='saveAction' action='saveAction'/></toolbar></ui>");
@@ -114,14 +113,13 @@ namespace PArticulo
 			w9.Expand = false;
 			w9.Fill = false;
 			// Container child hbox3.Gtk.Box+BoxChild
-			this.entryCat = new global::Gtk.Entry ();
-			this.entryCat.CanFocus = true;
-			this.entryCat.Name = "entryCat";
-			this.entryCat.IsEditable = true;
-			this.entryCat.InvisibleChar = '•';
-			this.hbox3.Add (this.entryCat);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.entryCat]));
+			this.comboboxC = global::Gtk.ComboBox.NewText ();
+			this.comboboxC.Name = "comboboxC";
+			this.hbox3.Add (this.comboboxC);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.comboboxC]));
 			w10.Position = 1;
+			w10.Expand = false;
+			w10.Fill = false;
 			this.vbox1.Add (this.hbox3);
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox3]));
 			w11.PackType = ((global::Gtk.PackType)(1));
@@ -132,8 +130,8 @@ namespace PArticulo
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 394;
-			this.DefaultHeight = 137;
+			this.DefaultWidth = 380;
+			this.DefaultHeight = 141;
 			this.Show ();
 			this.saveAction.Activated += new global::System.EventHandler (this.OnSaveActionActivated);
 		}

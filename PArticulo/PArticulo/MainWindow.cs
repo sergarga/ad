@@ -26,6 +26,8 @@ public partial class MainWindow: Gtk.Window
 		comboboxA1.AppendText ("Empieza por");
 		comboboxA.AppendText ("nombre");
 		comboboxA.AppendText ("id");
+		comboboxA.AppendText ("categoria");
+		comboboxA.AppendText ("precio");
 		comboboxA1.Active = 0;
 		comboboxA.Active = 0;
 
