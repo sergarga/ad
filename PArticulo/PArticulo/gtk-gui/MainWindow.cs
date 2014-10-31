@@ -27,8 +27,8 @@ public partial class MainWindow
 	private global::Gtk.HBox hbox2;
 	private global::Gtk.Toolbar toolbar3;
 	private global::Gtk.HBox hbox3;
-	private global::Gtk.ComboBox comboboxC1;
 	private global::Gtk.ComboBox comboboxC;
+	private global::Gtk.ComboBox comboboxC1;
 	private global::Gtk.Entry entryC;
 	private global::Gtk.Button buttonC;
 	private global::Gtk.ScrolledWindow GtkScrolledWindow1;
@@ -173,18 +173,18 @@ public partial class MainWindow
 		this.hbox3.Name = "hbox3";
 		this.hbox3.Spacing = 6;
 		// Container child hbox3.Gtk.Box+BoxChild
-		this.comboboxC1 = global::Gtk.ComboBox.NewText ();
-		this.comboboxC1.Name = "comboboxC1";
-		this.hbox3.Add (this.comboboxC1);
-		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.comboboxC1]));
+		this.comboboxC = global::Gtk.ComboBox.NewText ();
+		this.comboboxC.Name = "comboboxC";
+		this.hbox3.Add (this.comboboxC);
+		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.comboboxC]));
 		w13.Position = 0;
 		w13.Expand = false;
 		w13.Fill = false;
 		// Container child hbox3.Gtk.Box+BoxChild
-		this.comboboxC = global::Gtk.ComboBox.NewText ();
-		this.comboboxC.Name = "comboboxC";
-		this.hbox3.Add (this.comboboxC);
-		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.comboboxC]));
+		this.comboboxC1 = global::Gtk.ComboBox.NewText ();
+		this.comboboxC1.Name = "comboboxC1";
+		this.hbox3.Add (this.comboboxC1);
+		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.comboboxC1]));
 		w14.Position = 1;
 		w14.Expand = false;
 		w14.Fill = false;
@@ -242,7 +242,15 @@ public partial class MainWindow
 		this.DefaultHeight = 300;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.addActionA.Activated += new global::System.EventHandler (this.OnAddActionAActivated);
+		this.editActionA.Activated += new global::System.EventHandler (this.OnEditActionAActivated);
 		this.refreshActionA.Activated += new global::System.EventHandler (this.OnRefreshActionAActivated);
 		this.refreshActionC.Activated += new global::System.EventHandler (this.OnRefreshActionCActivated);
+		this.addActionC.Activated += new global::System.EventHandler (this.OnAddActionCActivated);
+		this.deleteActionC.Activated += new global::System.EventHandler (this.OnDeleteActionCActivated);
+		this.editActionC.Activated += new global::System.EventHandler (this.OnEditActionCActivated);
+		this.deleteActionA.Activated += new global::System.EventHandler (this.OnDeleteActionAActivated);
+		this.buttonA.Clicked += new global::System.EventHandler (this.OnButtonAClicked);
+		this.buttonC.Clicked += new global::System.EventHandler (this.OnButtonCClicked);
 	}
 }
