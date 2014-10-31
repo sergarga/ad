@@ -26,6 +26,8 @@ public partial class MainWindow: Gtk.Window
 		comboboxA1.AppendText ("Empieza por");
 		comboboxA.AppendText ("nombre");
 		comboboxA.AppendText ("id");
+		comboboxA1.Active = 0;
+		comboboxA.Active = 0;
 
 
 		treeViewA.Selection.Changed += delegate {
@@ -52,6 +54,8 @@ public partial class MainWindow: Gtk.Window
 		comboboxC1.AppendText ("Empieza por");
 		comboboxC.AppendText ("nombre");
 		comboboxC.AppendText ("id");
+		comboboxC1.Active = 0;
+		comboboxC.Active = 0;
 
 		treeViewC.Selection.Changed += delegate {
 			bool hasSelected = treeViewC.Selection.CountSelectedRows() > 0;
@@ -135,7 +139,7 @@ public partial class MainWindow: Gtk.Window
 	protected void OnAddActionAActivated (object sender, EventArgs e)
 	{
 		IDbCommand dbCommand = dbConnection.CreateCommand ();
-		string insertSql = "insert into articulo (nombre) values ('{0}')";
+		string insertSql = "insert into articulo (nombre, categoria, precio) values ('nuevo', 1, 1)";
 		insertSql= string.Format(insertSql, "Nuevo " + DateTime.Now);
 
 		dbCommand.CommandText = insertSql;
@@ -207,8 +211,8 @@ public partial class MainWindow: Gtk.Window
 	{
 		TreeIter treeIter;
 		treeViewC.Selection.GetSelected (out treeIter);
-		object id=listStoreC.GetValue (treeIter, 0);
-		new ArticuloView (id, 1);
+		object id = listStoreC.GetValue (treeIter, 0);
+		new CategoriaView (id);
 	}
 
 
@@ -217,7 +221,10 @@ public partial class MainWindow: Gtk.Window
 		TreeIter treeIter;
 		treeViewA.Selection.GetSelected (out treeIter);
 		object id=listStoreA.GetValue (treeIter, 0);
-		new ArticuloView (id, 0);
+		object nombre = listStoreA.GetValue (treeIter, 1);
+		object categoria = listStoreA.GetValue (treeIter, 2);
+		object precio = listStoreA.GetValue (treeIter, 3);
+		new ArticuloView (id, nombre, categoria, precio);
 	}
 
 	//ACCION BUSCAR
@@ -228,6 +235,7 @@ public partial class MainWindow: Gtk.Window
 
 		String selected = comboboxA.ActiveText;
 		String search = entryA.Text;
+
 
 		IDbCommand dbCommand = dbConnection.CreateCommand ();
 		String sql = "select * from articulo where {0} like '{1}%'";
