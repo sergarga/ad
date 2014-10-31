@@ -221,10 +221,7 @@ public partial class MainWindow: Gtk.Window
 		TreeIter treeIter;
 		treeViewA.Selection.GetSelected (out treeIter);
 		object id=listStoreA.GetValue (treeIter, 0);
-		object nombre = listStoreA.GetValue (treeIter, 1);
-		object categoria = listStoreA.GetValue (treeIter, 2);
-		object precio = listStoreA.GetValue (treeIter, 3);
-		new ArticuloView (id, nombre, categoria, precio);
+		new ArticuloView (id);
 	}
 
 	//ACCION BUSCAR

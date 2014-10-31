@@ -10,9 +10,6 @@ namespace PArticulo
 	public partial class ArticuloView : Gtk.Window
 	{
 		private object id;
-		private object nombre;
-		private object categoria;
-		private object precio;
 
 
 		public ArticuloView () : base(Gtk.WindowType.Toplevel)
@@ -20,11 +17,8 @@ namespace PArticulo
 			this.Build ();
 		}
 
-		public ArticuloView(object id, object nombre, object categoria, object precio) : this(){
+		public ArticuloView(object id) : this(){
 			this.id=id;
-			this.nombre = nombre;
-			this.categoria = categoria;
-			this.precio = precio;
 
 			IDbCommand dbCommand =	App.Instance.DbConnection.CreateCommand ();
 
@@ -65,6 +59,7 @@ namespace PArticulo
 
 			dbCommand.CommandText = String.Format ("update articulo set precio=@precio where id ={0}", entryId.Text);
 			dbCommand.AddParameter("precio", entryP.Text);
+			Console.WriteLine (entryP.Text);
 
 			dbCommand.ExecuteNonQuery ();
 
