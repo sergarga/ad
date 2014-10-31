@@ -29,7 +29,7 @@ namespace PArticulo
 			IDataReader dataReader = dbCommand.ExecuteReader ();
 			dataReader.Read ();
 
-			entryId.Text = dataReader ["id"].ToString ();
+
 			entryNombre.Text = dataReader ["nombre"].ToString ();
 			entryCat.Text = dataReader ["categoria"].ToString ();
 			entryP.Text = dataReader ["precio"].ToString ();
@@ -42,24 +42,10 @@ namespace PArticulo
 		{
 			IDbCommand dbCommand = App.Instance.DbConnection.CreateCommand ();
 
-			dbCommand.CommandText = String.Format ("update articulo set id=@id where id ={0}", id);
-			dbCommand.AddParameter("id", entryId.Text);
-
-			dbCommand.ExecuteNonQuery ();
-
-			dbCommand.CommandText = String.Format ("update articulo set nombre=@nombre where id ={0}", entryId.Text);
+			dbCommand.CommandText = String.Format ("update articulo set nombre=@nombre, categoria=@categoria, precio=@precio where id ={0}", id);
 			dbCommand.AddParameter("nombre", entryNombre.Text);
-
-			dbCommand.ExecuteNonQuery ();
-
-			dbCommand.CommandText = String.Format ("update articulo set categoria=@categoria where id ={0}", entryId.Text);
 			dbCommand.AddParameter("categoria", entryCat.Text);
-
-			dbCommand.ExecuteNonQuery ();
-
-			dbCommand.CommandText = String.Format ("update articulo set precio=@precio where id ={0}", entryId.Text);
 			dbCommand.AddParameter("precio", entryP.Text);
-			Console.WriteLine (entryP.Text);
 
 			dbCommand.ExecuteNonQuery ();
 
