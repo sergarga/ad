@@ -45,7 +45,7 @@ namespace PArticulo
 			dbCommand.CommandText = String.Format ("update articulo set nombre=@nombre, categoria=@categoria, precio=@precio where id ={0}", id);
 			dbCommand.AddParameter("nombre", entryNombre.Text);
 			dbCommand.AddParameter("categoria", entryCat.Text);
-			dbCommand.AddParameter("precio", entryP.Text);
+			dbCommand.AddParameter("precio", decimal.Parse(entryP.Text));
 
 			dbCommand.ExecuteNonQuery ();
 
