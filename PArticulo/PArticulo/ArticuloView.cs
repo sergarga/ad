@@ -35,7 +35,6 @@ namespace PArticulo
 			entryNombre.Text = dataReader ["nombre"].ToString ();
 			entryP.Text = dataReader ["precio"].ToString ();
 
-
 			dataReader.Close ();
 
 			RellenaComboCat ();

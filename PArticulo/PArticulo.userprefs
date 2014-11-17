@@ -1,11 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PArticulo/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../adluis/PComboBox/PComboBox/MainWindow.cs">
     <Files>
-      <File FileName="PArticulo/MainWindow.cs" Line="223" Column="47" />
-      <File FileName="PArticulo/ArticuloView.cs" Line="20" Column="32" />
-      <File FileName="PArticulo/CategoriaView.cs" Line="46" Column="15" />
-      <File FileName="PArticulo/Program.cs" Line="3" Column="11" />
+      <File FileName="../../adluis/PComboBox/PComboBox/MainWindow.cs" Line="29" Column="5" />
+      <File FileName="../../adluis/PComboBox/PComboBox/Program.cs" Line="5" Column="1" />
+      <File FileName="PArticulo/ArticuloView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
